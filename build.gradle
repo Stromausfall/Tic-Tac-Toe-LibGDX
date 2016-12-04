@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
-    }
+   }
 }
 
 allprojects {
@@ -22,6 +22,10 @@ allprojects {
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
+        guiceVersion = '3.0'
+        guiceGinVersion = '2.1.2'
+        visUIVersion = '1.2.4'
+        gdxKiwiVersion = '1.8.1.9.4'
     }
 
     repositories {
@@ -40,6 +44,10 @@ project(":desktop") {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+        // use guice
+        compile "com.google.inject:guice:$guiceVersion"
+        compile "com.google.inject.extensions:guice-assistedinject:$guiceVersion"
     }
 }
 
@@ -53,8 +61,14 @@ project(":html") {
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        compile "com.github.czyzby:gdx-kiwi:1.8.1.9.4:sources"
-        compile "com.kotcrab.vis:vis-ui:1.2.4:sources"
+        compile "com.github.czyzby:gdx-kiwi:$gdxKiwiVersion:sources"
+        compile "com.kotcrab.vis:vis-ui:$visUIVersion:sources"
+        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"
+
+        // use guice/gin
+        compile "com.google.gwt.inject:gin:$guiceGinVersion:sources"
+        compile "com.google.inject:guice:$guiceVersion:sources"
+        compile "com.google.inject.extensions:guice-assistedinject:$guiceVersion:sources"
     }
 }
 
@@ -64,8 +78,14 @@ project(":core") {
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.github.czyzby:gdx-kiwi:1.8.1.9.4"
-        compile "com.kotcrab.vis:vis-ui:1.2.4"
+        compile "com.github.czyzby:gdx-kiwi:$gdxKiwiVersion"
+        compile "com.kotcrab.vis:vis-ui:$visUIVersion"
+        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+
+        // use guice/gin
+        compile "com.google.gwt.inject:gin:$guiceGinVersion"
+        compile "com.google.inject:guice:$guiceVersion"
+        compile "com.google.inject.extensions:guice-assistedinject:$guiceVersion"
     }
 }
 

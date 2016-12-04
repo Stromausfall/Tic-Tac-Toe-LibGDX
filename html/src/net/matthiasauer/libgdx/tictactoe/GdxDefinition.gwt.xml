@@ -4,6 +4,7 @@
 	<inherits name='com.badlogic.gdx.backends.gdx_backends_gwt' />
 	<inherits name='com.github.czyzby.kiwi.GdxKiwi' />
 	<inherits name='com.kotcrab.vis.vis-ui' />
+	<inherits name="com.google.gwt.inject.Inject"/>
 
 	<inherits name='MyGdxGame' />
 	<entry-point class='net.matthiasauer.libgdx.tictactoe.client.HtmlLauncher' />
