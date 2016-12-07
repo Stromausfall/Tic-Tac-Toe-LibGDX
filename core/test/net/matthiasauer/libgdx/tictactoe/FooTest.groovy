@@ -13,6 +13,6 @@ class FooTest extends Specification {
         when:
             String result = foo.getAssetName()
         then:
-            result == "asdfasdf"
+            result == "badlogic.jpg2"
     }
 }
