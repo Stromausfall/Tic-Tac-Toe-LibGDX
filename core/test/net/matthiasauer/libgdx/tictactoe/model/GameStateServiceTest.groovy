@@ -204,4 +204,30 @@ class GameStateServiceTest extends Specification {
             gameStateService.getGameState() == GameState.UNDECIDED
             gameState == null
     }
+
+    @Unroll
+    def "test that the initialize method resets any previous GameState"() {
+        given: "create a GameStateService and set it to a win by a player"
+            tileOwnedByPlayer.setOwner(Owner.Circle)
+            GameStateServiceImpl gameStateService = new GameStateServiceImpl(tileManager)
+            gameStateService.addObserver(createObserver(gameStateService))
+
+            tileManager.get(0, 0) >> tileOwnedByPlayer
+            tileManager.get(0, 1) >> tileOwnedByPlayer
+            tileManager.get(0, 2) >> tileOwnedByPlayer
+
+            for (int x = 1; x < 3; x++) {
+                for (int y = 0; y < 3; y++) {
+                    tileManager.get(x, y) >> tileOwnedByNone
+                }
+            }
+
+            gameStateService.update(null, null)
+
+        when: "call the initialize method"
+            gameStateService.initialize()
+        then:
+            gameStateService.getGameState() == GameState.UNDECIDED
+            gameState == GameState.UNDECIDED
+    }
 }

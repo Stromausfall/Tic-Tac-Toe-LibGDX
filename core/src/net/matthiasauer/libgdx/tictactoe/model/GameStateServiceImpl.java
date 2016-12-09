@@ -26,6 +26,14 @@ public class GameStateServiceImpl extends Observable implements GameStateService
         return this.gameState;
     }
 
+    @Override
+    public void initialize() {
+        this.gameState = GameState.UNDECIDED;
+
+        this.setChanged();
+        this.notifyObservers();
+    }
+
     /**
      * This method is called whenever the observed object is changed. An
      * application calls an <tt>Observable</tt> object's
