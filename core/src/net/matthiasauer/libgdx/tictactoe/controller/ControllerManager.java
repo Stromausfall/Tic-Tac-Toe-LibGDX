@@ -5,4 +5,5 @@ package net.matthiasauer.libgdx.tictactoe.controller;
  */
 public interface ControllerManager {
     void initialize(Player player1, Player player2);
+    void tileClicked(int x, int y);
 }

@@ -5,4 +5,6 @@ package net.matthiasauer.libgdx.tictactoe.controller;
  */
 public interface Player {
     void startTurn();
+    void tileClicked(int x, int y);
+    boolean isTurnFinished();
 }
