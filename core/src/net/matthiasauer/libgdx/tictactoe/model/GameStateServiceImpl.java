@@ -2,14 +2,14 @@ package net.matthiasauer.libgdx.tictactoe.model;
 
 import com.badlogic.gdx.utils.ObjectSet;
 import com.github.czyzby.kiwi.util.gdx.collection.GdxSets;
+import net.matthiasauer.libgdx.tictactoe.utils.GdxObservable;
 
 import javax.inject.Inject;
-import java.util.Observable;
 
 /**
  * Created by Matthias on 08/12/2016.
  */
-public class GameStateServiceImpl extends Observable implements GameStateService {
+public class GameStateServiceImpl extends GdxObservable implements GameStateService {
     private final TileManager tileManager;
     private final ObjectSet<Owner> winDetectionHelper;
     private GameState gameState;
@@ -30,21 +30,11 @@ public class GameStateServiceImpl extends Observable implements GameStateService
     public void initialize() {
         this.gameState = GameState.UNDECIDED;
 
-        this.setChanged();
         this.notifyObservers();
     }
 
-    /**
-     * This method is called whenever the observed object is changed. An
-     * application calls an <tt>Observable</tt> object's
-     * <code>notifyObservers</code> method to have all the object's
-     * observers notified of the change.
-     *
-     * @param o   the observable object.
-     * @param arg an argument passed to the <code>notifyObservers</code>
-     */
     @Override
-    public void update(Observable o, Object arg) {
+    public void update() {
         this.checkIfHorizontalWin();
         this.checkIfVerticalWin();
         this.checkIfDiagonalWinVariant1();
@@ -76,7 +66,6 @@ public class GameStateServiceImpl extends Observable implements GameStateService
                 return;
             }
 
-            this.setChanged();
             this.notifyObservers();
         }
     }
@@ -163,7 +152,6 @@ public class GameStateServiceImpl extends Observable implements GameStateService
 
         // only notify observers if the game state has changed
         if (this.gameState != GameState.UNDECIDED) {
-            this.setChanged();
             this.notifyObservers();
         }
     }

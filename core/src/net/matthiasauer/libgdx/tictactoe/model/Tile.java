@@ -1,11 +1,11 @@
 package net.matthiasauer.libgdx.tictactoe.model;
 
-import java.util.Observable;
+import net.matthiasauer.libgdx.tictactoe.utils.GdxObservable;
 
 /**
  * Created by Matthias on 07/12/2016.
  */
-public class Tile extends Observable {
+public class Tile extends GdxObservable {
     private Owner owner = Owner.None;
 
     public Owner getOwner() {
@@ -16,7 +16,6 @@ public class Tile extends Observable {
         this.owner = owner;
 
         // notify observers
-        this.setChanged();
         this.notifyObservers();
     }
 }

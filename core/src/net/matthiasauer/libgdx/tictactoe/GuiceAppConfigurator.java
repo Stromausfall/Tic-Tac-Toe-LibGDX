@@ -9,7 +9,7 @@ import com.google.inject.AbstractModule;
 public class GuiceAppConfigurator extends AbstractModule {
     @Override
     protected void configure() {
-        for (Pair<Class, Class> injectable : RootConfiguratior.getInjectables()) {
+        for (Pair<Class, Class> injectable : RootConfigurator.getInjectables()) {
             bind(injectable.getFirst()).to(injectable.getSecond());
         }
     }

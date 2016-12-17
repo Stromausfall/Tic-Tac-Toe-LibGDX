@@ -10,7 +10,7 @@ import com.google.gwt.inject.client.binder.GinBinder;
 public class GinAppConfigurator implements GinModule {
     @Override
     public void configure(GinBinder binder) {
-        for (Pair<Class, Class> injectable : RootConfiguratior.getInjectables()) {
+        for (Pair<Class, Class> injectable : RootConfigurator.getInjectables()) {
             binder.bind(injectable.getFirst()).to(injectable.getSecond());
         }
     }

@@ -1,5 +1,6 @@
 package net.matthiasauer.libgdx.tictactoe.model
 
+import net.matthiasauer.libgdx.tictactoe.utils.GdxObserver
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -20,10 +21,10 @@ class GameStateServiceTest extends Specification {
         tileOwnedByNone.setOwner(Owner.None)
     }
 
-    private Observer createObserver(GameStateService gameStateService) {
-        return new Observer() {
+    private GdxObserver createObserver(GameStateService gameStateService) {
+        return new GdxObserver() {
                     @Override
-                    void update(Observable o, Object arg) {
+                    void update() {
                         gameState = gameStateService.getGameState()
                     }
                 }
@@ -46,7 +47,7 @@ class GameStateServiceTest extends Specification {
                 }
             }
         when: "when a horizontal win is performed -  and the gameStateService is notified about the change"
-            gameStateService.update(null, null)
+            gameStateService.update()
         then:
             gameState.winner == player
         where:
@@ -76,7 +77,7 @@ class GameStateServiceTest extends Specification {
                 }
             }
         when: "when a vertical win is performed -  and the gameStateService is notified about the change"
-            gameStateService.update(null, null)
+            gameStateService.update()
         then:
             gameState.winner == player
         where:
@@ -110,7 +111,7 @@ class GameStateServiceTest extends Specification {
                 }
             }
         when: "when a vertical win is performed -  and the gameStateService is notified about the change"
-            gameStateService.update(null, null)
+            gameStateService.update()
         then:
             gameState.winner == player
         where:
@@ -138,7 +139,7 @@ class GameStateServiceTest extends Specification {
                 }
             }
         when: "when a vertical win is performed -  and the gameStateService is notified about the change"
-            gameStateService.update(null, null)
+            gameStateService.update()
         then:
             gameState.winner == player
         where:
@@ -169,7 +170,7 @@ class GameStateServiceTest extends Specification {
             tileManager.get(2, 2) >> circle
 
         when: "when a vertical win is performed -  and the gameStateService is notified about the change"
-            gameStateService.update(null, null)
+            gameStateService.update()
         then:
             gameState.winner == Owner.None
     }
@@ -199,7 +200,7 @@ class GameStateServiceTest extends Specification {
 
             gameState = null
         when:
-            gameStateService.update(null, null)
+            gameStateService.update()
         then:
             gameStateService.getGameState() == GameState.UNDECIDED
             gameState == null
@@ -222,7 +223,7 @@ class GameStateServiceTest extends Specification {
                 }
             }
 
-            gameStateService.update(null, null)
+            gameStateService.update()
 
         when: "call the initialize method"
             gameStateService.initialize()

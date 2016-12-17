@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import net.matthiasauer.libgdx.tictactoe.controller.ControllerManager;
 
 import javax.inject.Inject;
 
@@ -12,17 +13,17 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 
-	private final Foo foo;
+	private final ControllerManager controllerManager;
 
 	@Inject
-	public MyGdxGame(Foo foo) {
-		this.foo = foo;
+	public MyGdxGame(ControllerManager controllerManager) {
+		this.controllerManager = controllerManager;
 	}
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture(foo.getAssetName());
+		//img = new Texture(foo.getAssetName());
 	}
 
 	@Override
@@ -30,13 +31,13 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		//batch.draw(img, 0, 0);
 		batch.end();
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		//img.dispose();
 	}
 }

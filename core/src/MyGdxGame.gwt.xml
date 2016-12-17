@@ -2,4 +2,11 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit trunk//EN" "http://google-web-toolkit.googlecode.com/svn/trunk/distro-source/core/src/gwt-module.dtd">
 <module>
 	<source path="net/matthiasauer/libgdx/tictactoe" />
+	<source path="net/matthiasauer/libgdx/tictactoe/controller" />
+	<source path="net/matthiasauer/libgdx/tictactoe/model" />
+	<source path="net/matthiasauer/libgdx/tictactoe/utils" />
+
+	<extend-configuration-property name="gdx.reflect.include" value="com.github.czyzby.kiwi" />
+	<extend-configuration-property name="gdx.reflect.include" value="net.matthiasauer.libgdx.tictactoe" />
+
 </module>

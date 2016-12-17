@@ -1,5 +1,6 @@
 package net.matthiasauer.libgdx.tictactoe.model
 
+import net.matthiasauer.libgdx.tictactoe.utils.GdxObserver
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -19,9 +20,9 @@ class TileTest extends Specification {
         given: "a tile on which an observer has been installed"
             Tile tile = new Tile()
             int counter = 0
-            tile.addObserver(new Observer() {
+            tile.addObserver(new GdxObserver() {
                 @Override
-                void update(Observable o, Object arg) {
+                void update() {
                     counter++
                 }
             })
