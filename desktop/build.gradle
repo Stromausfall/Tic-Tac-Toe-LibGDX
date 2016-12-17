@@ -12,6 +12,20 @@ task run(dependsOn: classes, type: JavaExec) {
     standardInput = System.in
     workingDir = project.assetsDir
     ignoreExitValue = true
+
+    // open debug port
+    jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006'
+}
+
+task debug(dependsOn: classes, type: JavaExec) {
+    main = project.mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    workingDir = project.assetsDir
+    ignoreExitValue = true
+    
+    // open debug port and wait until a debugger connects
+    jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006'
 }
 
 task dist(type: Jar) {

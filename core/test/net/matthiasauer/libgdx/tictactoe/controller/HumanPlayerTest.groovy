@@ -20,7 +20,8 @@ class HumanPlayerTest extends Specification {
     def setup() {
         this.tile = Mock(Tile)
         this.tileManager = Mock(TileManager)
-        this.classUnderTest = new HumanPlayer(this.tileManager, Owner.Circle)
+        this.classUnderTest = new HumanPlayer(Owner.Circle)
+        this.classUnderTest.initialize(this.tileManager)
     }
 
     def "test that after starting a turn the isTurnFinished() method returns false"() {
@@ -69,7 +70,8 @@ class HumanPlayerTest extends Specification {
 
     def "test that if the tileClickedMethod has been clicked on a free tile - then the tile owner is changed to the player"() {
         given:
-            classUnderTest = new HumanPlayer(this.tileManager, owner)
+            classUnderTest = new HumanPlayer(owner)
+            classUnderTest.initialize(this.tileManager)
             classUnderTest.startTurn()
         when:
             classUnderTest.tileClicked(2, 1)

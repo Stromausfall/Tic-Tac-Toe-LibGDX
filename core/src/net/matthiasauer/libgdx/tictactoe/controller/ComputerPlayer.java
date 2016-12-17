@@ -9,12 +9,16 @@ import net.matthiasauer.libgdx.tictactoe.model.TileManager;
  * Created by Matthias on 11/12/2016.
  */
 public class ComputerPlayer implements Player {
-    private final TileManager tileManager;
+    private TileManager tileManager;
     private final Owner owner;
 
-    public ComputerPlayer(TileManager tileManager, Owner owner) {
-        this.tileManager = tileManager;
+    public ComputerPlayer(Owner owner) {
         this.owner = owner;
+    }
+
+    @Override
+    public void initialize(TileManager tileManager) {
+        this.tileManager = tileManager;
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.github.czyzby.kiwi.util.gdx.collection.GdxLists;
 import net.matthiasauer.libgdx.tictactoe.model.GameState;
 import net.matthiasauer.libgdx.tictactoe.model.GameStateService;
 import net.matthiasauer.libgdx.tictactoe.model.ModelManager;
+import net.matthiasauer.libgdx.tictactoe.model.TileManager;
+import net.matthiasauer.libgdx.tictactoe.view.ViewManager;
 
 import javax.inject.Inject;
 
@@ -12,7 +14,9 @@ import javax.inject.Inject;
  * Created by Matthias on 08/12/2016.
  */
 public class ControllerManagerImpl implements ControllerManager {
+    private final TileManager tileManager;
     private final ModelManager modelManager;
+    private final ViewManager viewManager;
     private final GameStateService gameStateService;
     private final PooledLinkedList<Player> players;
 
@@ -23,9 +27,11 @@ public class ControllerManagerImpl implements ControllerManager {
     }
 
     @Inject
-    public ControllerManagerImpl(ModelManager modelManager, GameStateService gameStateService) {
+    public ControllerManagerImpl(ModelManager modelManager, GameStateService gameStateService, TileManager tileManager, ViewManager viewManager) {
         this.modelManager = modelManager;
         this.gameStateService = gameStateService;
+        this.tileManager = tileManager;
+        this.viewManager = viewManager;
         this.players = GdxLists.newList(2);
     }
 
@@ -35,7 +41,12 @@ public class ControllerManagerImpl implements ControllerManager {
         this.players.add(player1);
         this.players.add(player2);
 
+        // initialize the players
+        player1.initialize(this.tileManager);
+        player2.initialize(this.tileManager);
+
         this.startCurrentPlayersTurn();
+        this.viewManager.initialize();
     }
 
     private void startCurrentPlayersTurn() {

@@ -5,39 +5,40 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import net.matthiasauer.libgdx.tictactoe.controller.ComputerPlayer;
 import net.matthiasauer.libgdx.tictactoe.controller.ControllerManager;
+import net.matthiasauer.libgdx.tictactoe.controller.HumanPlayer;
+import net.matthiasauer.libgdx.tictactoe.model.Owner;
+import net.matthiasauer.libgdx.tictactoe.view.ViewManager;
 
 import javax.inject.Inject;
 
 public class MyGdxGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-
 	private final ControllerManager controllerManager;
+	private final ViewManager viewManager;
 
 	@Inject
-	public MyGdxGame(ControllerManager controllerManager) {
+	public MyGdxGame(ControllerManager controllerManager, ViewManager viewManager) {
 		this.controllerManager = controllerManager;
+		this.viewManager = viewManager;
 	}
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		//img = new Texture(foo.getAssetName());
+		// initalize the game
+		this.controllerManager.initialize(
+				new HumanPlayer(Owner.Circle),
+				new ComputerPlayer(Owner.Cross)
+		);
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		//batch.draw(img, 0, 0);
-		batch.end();
+		this.viewManager.render();
 	}
 
 	@Override
 	public void dispose () {
-		batch.dispose();
-		//img.dispose();
+		this.viewManager.dispose();
 	}
 }

@@ -9,13 +9,17 @@ import net.matthiasauer.libgdx.tictactoe.model.TileManager;
  */
 public class HumanPlayer implements Player {
     private final Owner owner;
-    private final TileManager tileManager;
+    private TileManager tileManager;
     private boolean turnFinished;
 
-    public HumanPlayer(TileManager tileManager, Owner owner) {
-        this.tileManager = tileManager;
+    public HumanPlayer(Owner owner) {
         this.turnFinished = false;
         this.owner = owner;
+    }
+
+    @Override
+    public void initialize(TileManager tileManager) {
+        this.tileManager = tileManager;
     }
 
     @Override

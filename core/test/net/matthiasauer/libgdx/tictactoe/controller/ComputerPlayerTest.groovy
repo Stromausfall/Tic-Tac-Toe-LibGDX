@@ -20,7 +20,8 @@ class ComputerPlayerTest extends Specification {
     def setup() {
         this.tile = Mock(Tile)
         this.tileManager = Mock(TileManager)
-        this.classUnderTest = new ComputerPlayer(this.tileManager, Owner.Circle)
+        this.classUnderTest = new ComputerPlayer(Owner.Circle)
+        this.classUnderTest.initialize(this.tileManager)
     }
 
     def "test that after the startTurn() method is called the turn is finished for the computer player"() {
@@ -44,7 +45,8 @@ class ComputerPlayerTest extends Specification {
     @Unroll
     def "test that the owner of the retrieved free tile is changed to the player"() {
         when:
-            classUnderTest = new ComputerPlayer(this.tileManager, player)
+            classUnderTest = new ComputerPlayer(player)
+            classUnderTest.initialize(this.tileManager)
             classUnderTest.startTurn()
         then:
             classUnderTest.isTurnFinished()
@@ -58,7 +60,8 @@ class ComputerPlayerTest extends Specification {
     @Unroll
     def "test that tiles are searched until a free one is found"() {
         when:
-            classUnderTest = new ComputerPlayer(this.tileManager, player)
+            classUnderTest = new ComputerPlayer(player)
+            classUnderTest.initialize(this.tileManager)
             classUnderTest.startTurn()
         then:
             classUnderTest.isTurnFinished()
