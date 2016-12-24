@@ -46,10 +46,12 @@ public class ControllerManagerImpl implements ControllerManager {
         player2.initialize(this.tileManager);
 
         this.startCurrentPlayersTurn();
-        this.viewManager.initialize();
+        this.viewManager.initialize(this);
     }
 
     private void startCurrentPlayersTurn() {
+        this.gameStateService.update();
+
         if (this.gameStateService.getGameState() == GameState.UNDECIDED) {
             this.getCurrentPlayer().startTurn();
             this.checkIfTurnFinished();
@@ -76,8 +78,10 @@ public class ControllerManagerImpl implements ControllerManager {
 
     @Override
     public void tileClicked(int x, int y) {
-        this.getCurrentPlayer().tileClicked(x, y);
+        if (this.gameStateService.getGameState() == GameState.UNDECIDED) {
+            this.getCurrentPlayer().tileClicked(x, y);
 
-        this.checkIfTurnFinished();
+            this.checkIfTurnFinished();
+        }
     }
 }

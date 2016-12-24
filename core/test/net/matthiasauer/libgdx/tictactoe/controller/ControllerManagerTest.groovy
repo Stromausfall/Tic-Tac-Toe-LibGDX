@@ -37,7 +37,7 @@ class ControllerManagerTest extends Specification {
         when:
             controllerManager.initialize(player1, player2)
         then:
-            1 * viewManager.initialize()
+            1 * viewManager.initialize(controllerManager)
     }
 
     def "test that the initialize method calls the initialize method of the players"() {
@@ -104,6 +104,18 @@ class ControllerManagerTest extends Specification {
             1 * player1.startTurn()
             1 * player1.tileClicked(_ as Integer, _ as Integer)
             2 * player1.isTurnFinished() >> false
+    }
+
+    def "test that the gameStateService is updated when we check if a player's turn begins"() {
+        given:
+            ControllerManager controllerManager = new ControllerManagerImpl(this.modelManager, this.gameStateService, this.tileManager, this.viewManager)
+        when:
+            controllerManager.initialize(player1, player2)
+            controllerManager.tileClicked(1, 2)
+        then:
+            1 * player1.isTurnFinished() >> true
+            2 * player2.isTurnFinished() >> false
+            2 * this.gameStateService.update()
     }
 
     def "test that after the game has terminated no new turn is started for any player"() {

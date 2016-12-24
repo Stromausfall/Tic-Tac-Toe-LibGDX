@@ -172,6 +172,7 @@ class GameStateServiceTest extends Specification {
         when: "when a vertical win is performed -  and the gameStateService is notified about the change"
             gameStateService.update()
         then:
+            gameStateService.getGameState() == GameState.WON_BY_NOONE
             gameState.winner == Owner.None
     }
 

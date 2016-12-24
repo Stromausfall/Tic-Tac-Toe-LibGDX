@@ -15,7 +15,7 @@ public class HumanPlayer implements Player {
     public HumanPlayer(Owner owner) {
         this.turnFinished = false;
         this.owner = owner;
-    }
+    }//FIX BUG when stalemate + fix tests !
 
     @Override
     public void initialize(TileManager tileManager) {

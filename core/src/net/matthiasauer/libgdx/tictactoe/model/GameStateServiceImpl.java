@@ -23,6 +23,7 @@ public class GameStateServiceImpl extends GdxObservable implements GameStateServ
 
     @Override
     public GameState getGameState() {
+        //this.update();
         return this.gameState;
     }
 
@@ -66,6 +67,7 @@ public class GameStateServiceImpl extends GdxObservable implements GameStateServ
                 return;
             }
 
+            this.gameState = GameState.WON_BY_NOONE;
             this.notifyObservers();
         }
     }

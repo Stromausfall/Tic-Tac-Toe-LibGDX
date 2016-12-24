@@ -32,8 +32,8 @@ public class ComputerPlayer implements Player {
 
     private Tile getFreeTile() {
         while (true) {
-            int x = MathUtils.random(0, 3);
-            int y = MathUtils.random(0, 3);
+            int x = MathUtils.random(0, 2);
+            int y = MathUtils.random(0, 2);
             Tile tile = this.tileManager.get(x, y);
 
             if (tile.getOwner() == Owner.None) {
